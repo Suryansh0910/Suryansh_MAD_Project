@@ -1,52 +1,63 @@
-# AI-Powered Customer Communication Service (MERN + Calls & Messages)
+# Football Info App (React Native + Football APIs)
 
-**1. Name & Roll Number:**
-*Suryansh Gupta – 2024-B-08102006B*
-
----
-
-## 2. Problem Statement
-Many small and medium businesses struggle to provide consistent customer service because phone calls and follow-up messages are manual, time-consuming, and expensive. This leads to slow responses, missed opportunities, and poor customer experience.  
-**Goal:** Automate customer communication (calls + messages) with AI-generated content at very low cost.
+## 1. Name & Roll Number  
+**Suryansh Gupta – 2024-B-08102006B**
 
 ---
 
-## 3. Proposed Solution / Idea
-Build a **MERN** web service that lets businesses:
-- Generate personalized **AI-written** messages (WhatsApp/SMS/email).
-- Trigger **automated voice calls** with natural speech.
+## 2. Problem Statement  
+Football fans often struggle to find a single platform that offers clean, fast, and real-time updates on football matches, league standings, and fixtures. Existing platforms are either bloated with ads, too complex, or not tailored to the user's favorite teams and leagues.
+
+**Goal:**  
+Build a simple, responsive mobile app that provides real-time football match updates, fixtures, results, and league standings using football data APIs.
 
 ---
 
-## 4. Key Features
-- **AI message generation** (personalized tone & language).
-- **Bulk campaigns**.
-- **Multi-channel** (SMS/WhatsApp/voice; extensible to email).
+## 3. Proposed Solution / Idea  
+Develop a mobile application using React Native that:
+
+- Displays live match scores and current game status.
+- Shows upcoming fixtures and past results.
+- Provides league tables, team info, and top scorers.
+- Allows users to select their favorite teams/leagues to customize their feed.
 
 ---
 
-## 5. Target Users / Audience
-- MSMEs, D2C brands, clinics/salons, service providers, and startups that need affordable, consistent customer communication.
+## 4. Key Features  
+
+- Real-time live scores for ongoing matches.  
+- League-wise fixture and results view.  
+- Team-wise and player-wise statistics.  
+- Follow favorite teams and receive match reminders.  
+- Clean and intuitive mobile UI (dark/light mode).  
 
 ---
 
-## 6. Technology Stack
-- **Frontend:** React Native (Vite)
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB (Mongoose)
-- **Telephony/Messaging API:** Twilio or Vonage
-- **AI Text Generation:** Any LLM provider (e.g., OpenAI/Google/Anthropic) via REST API
-- **Auth & Security:** JWT, bcrypt, dotenv, CORS, rate limiting
+## 5. Target Users / Audience  
+
+- Casual and dedicated football fans.  
+- Fantasy league players.  
+- Students or working professionals who want quick updates.  
+- People who prefer light and ad-free football score apps.
 
 ---
 
-## 7. Expected Outcome
-A production-ready MVP where a business user can:
-- Upload contacts, craft a template, and run a campaign.
-- Automatically send **AI-personalized SMS/WhatsApp** and place **TTS voice calls**.
-- See real-time delivery/call status and basic analytics.
-This reduces manual workload and improves response speed/CSAT **while cutting costs**.
+## 6. Technology Stack  
+
+- **Frontend:** React Native (Expo or CLI)  
+- **Backend:** Node.js + Express.js  
+- **Football Data API:** API-Football, rapid-api , or SportMonks  
 
 ---
 
+## 7. Expected Outcome  
+
+A mobile app where users can:
+
+- Check live scores, upcoming matches, and league standings.  
+- Follow their favorite teams and receive custom feeds.  
+- Get notified before important matches.  
+- Use a smooth, fast, and ad-free interface.  
+
+This will make it easier for football fans to stay updated with minimal effort and no distractions.
 

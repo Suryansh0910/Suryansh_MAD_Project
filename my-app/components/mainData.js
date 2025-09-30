@@ -1,0 +1,1 @@
+//fetching apis for data ........ untill then using smaple data from rapid api 

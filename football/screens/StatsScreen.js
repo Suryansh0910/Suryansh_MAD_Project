@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Image, useColorScheme } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const StatsScreen = () => {
@@ -7,8 +7,6 @@ const StatsScreen = () => {
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [error, setError] = useState(null);
-    const scheme = useColorScheme();
-    const isDark = scheme === 'dark';
 
     const fetchScorers = async () => {
         try {
@@ -41,33 +39,28 @@ const StatsScreen = () => {
         fetchScorers();
     }, []);
 
-    const backgroundColor = isDark ? '#121212' : '#f0f0f0';
-    const cardBg = isDark ? '#1e1e1e' : '#fff';
-    const textColor = isDark ? '#fff' : '#333';
-    const subTextColor = isDark ? '#aaa' : '#666';
-
     const renderItem = ({ item, index }) => (
-        <View style={[styles.card, { backgroundColor: cardBg }]}>
+        <View style={styles.card}>
             <View style={styles.rankContainer}>
                 <Text style={styles.rank}>{index + 1}</Text>
             </View>
             <View style={styles.playerInfo}>
-                <Text style={[styles.playerName, { color: textColor }]}>{item.player.name}</Text>
+                <Text style={styles.playerName}>{item.player.name}</Text>
                 <View style={styles.teamRow}>
                     {item.team.crest && <Image source={{ uri: item.team.crest }} style={styles.teamLogo} />}
-                    <Text style={[styles.teamName, { color: subTextColor }]}>{item.team.shortName || item.team.name}</Text>
+                    <Text style={styles.teamName}>{item.team.shortName || item.team.name}</Text>
                 </View>
             </View>
             <View style={styles.goalsContainer}>
                 <Text style={styles.goals}>{item.goals}</Text>
-                <Text style={[styles.goalsLabel, { color: subTextColor }]}>Goals</Text>
+                <Text style={styles.goalsLabel}>Goals</Text>
             </View>
         </View>
     );
 
     if (loading && !refreshing) {
         return (
-            <View style={[styles.center, { backgroundColor }]}>
+            <View style={[styles.center, { backgroundColor: '#f0f0f0' }]}>
                 <ActivityIndicator size="large" color="#37003c" />
             </View>
         );
@@ -75,15 +68,15 @@ const StatsScreen = () => {
 
     if (error) {
         return (
-            <View style={[styles.center, { backgroundColor }]}>
-                <Text style={[styles.errorText, { color: textColor }]}>Error: {error}</Text>
+            <View style={[styles.center, { backgroundColor: '#f0f0f0' }]}>
+                <Text style={[styles.errorText, { color: '#333' }]}>Error: {error}</Text>
             </View>
         );
     }
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: '#37003c' }]} edges={['top']}>
-            <View style={[styles.contentContainer, { backgroundColor }]}>
+            <View style={[styles.contentContainer, { backgroundColor: '#f0f0f0' }]}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.screenTitle}>Top Scorers</Text>
                 </View>
@@ -95,7 +88,7 @@ const StatsScreen = () => {
                     refreshControl={
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#37003c" />
                     }
-                    ListEmptyComponent={<Text style={[styles.emptyText, { color: subTextColor }]}>No stats available.</Text>}
+                    ListEmptyComponent={<Text style={[styles.emptyText, { color: '#666' }]}>No stats available.</Text>}
                 />
             </View>
         </SafeAreaView>
@@ -139,6 +132,7 @@ const styles = StyleSheet.create({
     },
     card: {
         flexDirection: 'row',
+        backgroundColor: '#fff',
         borderRadius: 12,
         padding: 16,
         marginBottom: 12,
@@ -167,6 +161,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         marginBottom: 4,
+        color: '#333',
     },
     teamRow: {
         flexDirection: 'row',
@@ -180,6 +175,7 @@ const styles = StyleSheet.create({
     },
     teamName: {
         fontSize: 14,
+        color: '#666',
     },
     goalsContainer: {
         alignItems: 'center',
@@ -193,6 +189,7 @@ const styles = StyleSheet.create({
     },
     goalsLabel: {
         fontSize: 10,
+        color: '#666',
     },
     errorText: {
         fontSize: 16,

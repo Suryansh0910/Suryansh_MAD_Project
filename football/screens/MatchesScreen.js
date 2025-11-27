@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, RefreshControl, useColorScheme } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MatchCard from '../components/MatchCard';
 
@@ -8,8 +8,6 @@ const MatchesScreen = () => {
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [error, setError] = useState(null);
-    const scheme = useColorScheme();
-    const isDark = scheme === 'dark';
 
     const fetchMatches = async () => {
         try {
@@ -44,12 +42,9 @@ const MatchesScreen = () => {
         fetchMatches();
     }, []);
 
-    const backgroundColor = isDark ? '#121212' : '#f0f0f0';
-    const textColor = isDark ? '#fff' : '#333';
-
     if (loading && !refreshing) {
         return (
-            <View style={[styles.center, { backgroundColor }]}>
+            <View style={[styles.center, { backgroundColor: '#f0f0f0' }]}>
                 <ActivityIndicator size="large" color="#37003c" />
             </View>
         );
@@ -57,15 +52,15 @@ const MatchesScreen = () => {
 
     if (error) {
         return (
-            <View style={[styles.center, { backgroundColor }]}>
-                <Text style={[styles.errorText, { color: textColor }]}>Error: {error}</Text>
+            <View style={[styles.center, { backgroundColor: '#f0f0f0' }]}>
+                <Text style={[styles.errorText, { color: '#333' }]}>Error: {error}</Text>
             </View>
         );
     }
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: '#37003c' }]} edges={['top']}>
-            <View style={[styles.contentContainer, { backgroundColor }]}>
+            <View style={[styles.contentContainer, { backgroundColor: '#f0f0f0' }]}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.screenTitle}>Recent Results</Text>
                 </View>
@@ -77,7 +72,7 @@ const MatchesScreen = () => {
                     refreshControl={
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#37003c" />
                     }
-                    ListEmptyComponent={<Text style={[styles.emptyText, { color: isDark ? '#aaa' : '#666' }]}>No finished matches found.</Text>}
+                    ListEmptyComponent={<Text style={[styles.emptyText, { color: '#666' }]}>No finished matches found.</Text>}
                 />
             </View>
         </SafeAreaView>

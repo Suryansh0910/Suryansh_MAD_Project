@@ -1,28 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, useColorScheme } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 const MatchCard = ({ match }) => {
   const { homeTeam, awayTeam, score, status, utcDate } = match;
-  const scheme = useColorScheme();
-  const isDark = scheme === 'dark';
 
   const formatDate = (dateString) => {
     const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     return new Date(dateString).toLocaleDateString('en-GB', options);
   };
 
-  const cardBg = isDark ? '#1e1e1e' : '#fff';
-  const textColor = isDark ? '#ddd' : '#333';
-  const dateColor = isDark ? '#aaa' : '#666';
-
   return (
-    <View style={[styles.card, { backgroundColor: cardBg }]}>
-      <Text style={[styles.date, { color: dateColor }]}>{formatDate(utcDate)}</Text>
-      
+    <View style={styles.card}>
+      <Text style={styles.date}>{formatDate(utcDate)}</Text>
+
       <View style={styles.row}>
         <View style={styles.teamContainer}>
           {homeTeam.crest && <Image source={{ uri: homeTeam.crest }} style={styles.logo} />}
-          <Text style={[styles.teamName, { color: textColor }]}>{homeTeam.shortName || homeTeam.name}</Text>
+          <Text style={styles.teamName}>{homeTeam.shortName || homeTeam.name}</Text>
         </View>
 
         <View style={styles.scoreContainer}>
@@ -37,7 +31,7 @@ const MatchCard = ({ match }) => {
 
         <View style={styles.teamContainer}>
           {awayTeam.crest && <Image source={{ uri: awayTeam.crest }} style={styles.logo} />}
-          <Text style={[styles.teamName, { color: textColor }]}>{awayTeam.shortName || awayTeam.name}</Text>
+          <Text style={styles.teamName}>{awayTeam.shortName || awayTeam.name}</Text>
         </View>
       </View>
     </View>
@@ -46,6 +40,7 @@ const MatchCard = ({ match }) => {
 
 const styles = StyleSheet.create({
   card: {
+    backgroundColor: '#fff',
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
@@ -62,6 +57,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     textAlign: 'center',
     fontWeight: '600',
+    color: '#666',
   },
   row: {
     flexDirection: 'row',
@@ -83,6 +79,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: '#333',
   },
   scoreContainer: {
     width: 60,

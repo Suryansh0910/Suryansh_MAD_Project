@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Image, useColorScheme } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TableScreen = () => {
@@ -7,8 +7,6 @@ const TableScreen = () => {
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [error, setError] = useState(null);
-    const scheme = useColorScheme();
-    const isDark = scheme === 'dark';
 
     const fetchTable = async () => {
         try {
@@ -42,39 +40,32 @@ const TableScreen = () => {
         fetchTable();
     }, []);
 
-    const backgroundColor = isDark ? '#121212' : '#f0f0f0';
-    const rowBg = isDark ? '#1e1e1e' : '#fff';
-    const headerBg = isDark ? '#333' : '#e0e0e0';
-    const textColor = isDark ? '#fff' : '#333';
-    const headerTextColor = isDark ? '#ccc' : '#555';
-    const borderColor = isDark ? '#333' : '#f0f0f0';
-
     const renderHeader = () => (
-        <View style={[styles.tableHeader, { backgroundColor: headerBg, borderBottomColor: borderColor }]}>
-            <Text style={[styles.headerText, styles.posCol, { color: headerTextColor }]}>#</Text>
-            <Text style={[styles.headerText, styles.teamCol, { color: headerTextColor }]}>Team</Text>
-            <Text style={[styles.headerText, styles.statCol, { color: headerTextColor }]}>P</Text>
-            <Text style={[styles.headerText, styles.statCol, { color: headerTextColor }]}>GD</Text>
-            <Text style={[styles.headerText, styles.ptsCol, { color: headerTextColor }]}>Pts</Text>
+        <View style={styles.tableHeader}>
+            <Text style={[styles.headerText, styles.posCol]}>#</Text>
+            <Text style={[styles.headerText, styles.teamCol]}>Team</Text>
+            <Text style={[styles.headerText, styles.statCol]}>P</Text>
+            <Text style={[styles.headerText, styles.statCol]}>GD</Text>
+            <Text style={[styles.headerText, styles.ptsCol]}>Pts</Text>
         </View>
     );
 
     const renderItem = ({ item }) => (
-        <View style={[styles.row, { backgroundColor: rowBg, borderBottomColor: borderColor }]}>
-            <Text style={[styles.cellText, styles.posCol, { color: textColor }]}>{item.position}</Text>
+        <View style={styles.row}>
+            <Text style={[styles.cellText, styles.posCol]}>{item.position}</Text>
             <View style={[styles.teamCol, styles.teamCell]}>
                 <Image source={{ uri: item.team.crest }} style={styles.crest} />
-                <Text style={[styles.teamName, { color: textColor }]} numberOfLines={1}>{item.team.shortName || item.team.name}</Text>
+                <Text style={styles.teamName} numberOfLines={1}>{item.team.shortName || item.team.name}</Text>
             </View>
-            <Text style={[styles.cellText, styles.statCol, { color: textColor }]}>{item.playedGames}</Text>
-            <Text style={[styles.cellText, styles.statCol, { color: textColor }]}>{item.goalDifference}</Text>
-            <Text style={[styles.cellText, styles.ptsCol, styles.bold, { color: textColor }]}>{item.points}</Text>
+            <Text style={[styles.cellText, styles.statCol]}>{item.playedGames}</Text>
+            <Text style={[styles.cellText, styles.statCol]}>{item.goalDifference}</Text>
+            <Text style={[styles.cellText, styles.ptsCol, styles.bold]}>{item.points}</Text>
         </View>
     );
 
     if (loading && !refreshing) {
         return (
-            <View style={[styles.center, { backgroundColor }]}>
+            <View style={[styles.center, { backgroundColor: '#f0f0f0' }]}>
                 <ActivityIndicator size="large" color="#37003c" />
             </View>
         );
@@ -82,15 +73,15 @@ const TableScreen = () => {
 
     if (error) {
         return (
-            <View style={[styles.center, { backgroundColor }]}>
-                <Text style={[styles.errorText, { color: textColor }]}>Error: {error}</Text>
+            <View style={[styles.center, { backgroundColor: '#f0f0f0' }]}>
+                <Text style={[styles.errorText, { color: '#333' }]}>Error: {error}</Text>
             </View>
         );
     }
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: '#37003c' }]} edges={['top']}>
-            <View style={[styles.contentContainer, { backgroundColor }]}>
+            <View style={[styles.contentContainer, { backgroundColor: '#f0f0f0' }]}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.screenTitle}>League Table</Text>
                 </View>
@@ -150,6 +141,8 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 16,
         borderBottomWidth: 1,
+        backgroundColor: '#e0e0e0',
+        borderBottomColor: '#f0f0f0',
     },
     row: {
         flexDirection: 'row',
@@ -157,13 +150,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         alignItems: 'center',
+        backgroundColor: '#fff',
+        borderBottomColor: '#f0f0f0',
     },
     headerText: {
         fontWeight: 'bold',
         fontSize: 12,
+        color: '#555',
     },
     cellText: {
         fontSize: 14,
+        color: '#333',
     },
     posCol: {
         width: 30,
@@ -186,6 +183,7 @@ const styles = StyleSheet.create({
     teamName: {
         fontSize: 14,
         fontWeight: '500',
+        color: '#333',
     },
     statCol: {
         width: 35,
